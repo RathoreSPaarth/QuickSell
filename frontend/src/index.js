@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import 'C:\Users\A K S Rathore\Desktop\quicksell-frontend\src\styles.css';  // Import global styles
-import App from './app'; // Main App component
+import './styles.css'
+import App from './App'; // Main App component
 
 ReactDOM.render(
   <React.StrictMode>

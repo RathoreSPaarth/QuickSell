@@ -7,10 +7,27 @@ const router = express.Router();
 // JWT Secret
 const JWT_SECRET = 'mysecretkey';
 
+function generateReferralCode() {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  for (let i = 0; i < 6; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
+}
+
+
+
 // Registration Route
 router.post('/register', async (req, res) => {
-  const { email, password, confirmPassword, name, address, contactNo, referralCode, walletAmount } = req.body;
+  const { email, password, confirmPassword, name, address, contactNo, referralCode } = req.body;
+  console.log(req.body)
+  // Validate required fields
+  if (!email || !password || !confirmPassword || !name || !address || !contactNo) {
+    return res.status(400).json({ msg: 'Please enter all required fields' });
+  }
 
+  // Check if passwords match
   if (password !== confirmPassword) {
     return res.status(400).json({ msg: 'Passwords do not match' });
   }
@@ -25,10 +42,29 @@ router.post('/register', async (req, res) => {
     // Hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
+    const inputReferralCode = referralCode
 
-    // Create new user
-    user = new User({ email, password: hashedPassword, name, address, contactNo, referralCode, walletAmount });
+
+    if(!referralCode){
+      // Create new user
+    user = new User({ email, password: hashedPassword, name, address, contactNo, referralCode:generateReferralCode(), walletAmount:10000 });
     await user.save();
+    }
+
+    // Handle referral bonus logic (optional)
+    else{
+      // Find the user who referred
+      const referringUser = await User.findOne({ referralCode });
+      if (referringUser) {
+        // Add bonus points or perform any other referral reward logic
+        // E.g., updating wallet amount or referral count
+        referringUser.walletAmount = (referringUser.walletAmount || 0) + 100; // Example bonus
+        await referringUser.save();
+      }
+
+      user = new User({ email, password: hashedPassword, name, address, contactNo, referralCode:generateReferralCode(), walletAmount: 10100 });
+    await user.save();
+    }
 
     // Return JWT token
     const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '1h' });

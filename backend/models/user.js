@@ -29,15 +29,11 @@ const UserSchema = new mongoose.Schema({
     default: null
   },
   walletAmount: {
-    type: Number,
-    default: 10000  // Default wallet amount is 0
+    type: Number
   }
 }, {
   timestamps: true
 });
 
+// Export the model in a single statement
 module.exports = mongoose.model('User', UserSchema);
-
-
-module.exports = User;
-

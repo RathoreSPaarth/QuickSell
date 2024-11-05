@@ -1,148 +1,16 @@
-/* Global Styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.App {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f4f4f4;
-}
-
-h2 {
-  color: #333;
-  text-align: center;
-}
-
-/* Login/Register Form */
-.login {
-  background-color: #fff;
-  padding: 40px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 400px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-input {
-  margin: 10px 0;
-  padding: 10px;
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-input:focus {
-  border-color: #007BFF;
-  outline: none;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  width: 100%;
-}
-
-button:hover {
-  background-color: #0056b3;
-  opacity: 0.9;
-}
-
-/* Toggle Buttons for Login/Registration */
-.toggle-buttons {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.toggle-buttons button {
-  margin: 0 10px;
-  padding: 10px 20px;
-  cursor: pointer;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  background-color: #ccc;
-  font-size: 16px;
-}
-
-.toggle-buttons button:hover {
-  opacity: 0.8;
-}
-
-.toggle-buttons button:focus {
-  outline: none;
-}
-
-/* Tabs Section (Buy/Sell) */
-.tabs {
-  text-align: center;
-}
-
-.tab-buttons {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.tab-buttons button {
-  padding: 10px 20px;
-  margin: 0 10px;
-  cursor: pointer;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  background-color: #007BFF;
-}
-
-.tab-buttons button:hover {
-  background-color: #0056b3;
-}
-
-.tab-content {
-  text-align: center;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  background-color: #fff;
-  margin: 10px 0;
-  padding: 20px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Responsive Design */
-@media only screen and (max-width: 768px) {
-  .login {
-    width: 90%;
-  }
-
-  button {
-    width: 100%;
-  }
-
-  input {
-    width: 100%;
-  }
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
