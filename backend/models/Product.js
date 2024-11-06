@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // Define the schema for the 'products' collection
 const productSchema = new mongoose.Schema({
   sellerStudentID: {
-    type: mongoose.Schema.Types.ObjectId,  // Reference to the User (Seller)
+    type: String,  // Reference to the User (Seller)
     ref: 'userDetails',
     required: true
   },
@@ -20,17 +20,26 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  productType: {
+    type: String,
+    required: true
+  },
   prodImage: {
     type: String,  // Store image as a URL or file path
     default: null
   },
   bid: {
     type: Boolean,  // Whether the product is up for bidding or not (Yes/No)
-    required: true
+    required: true,
+    default:false
   },
   price: {
     type: Number,
     required: true  // Price for the product
+  },
+  base_price: {
+    type: Number,
+    required: false  // base bid for the product
   },
   buyerStudentID: {
     type: mongoose.Schema.Types.ObjectId,  // Reference to the User (Buyer)
