@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Register from './pages/register';
 import Login from './pages/login';
 import Homepage from './pages/homepage';
+import Sell from './pages/sell';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -24,6 +25,11 @@ function App() {
           <Route 
             path="/homepage" 
             element={isAuthenticated ? <Homepage /> : <Navigate to="/login" replace />} 
+          />
+
+          <Route 
+            path="/sell" 
+            element={isAuthenticated ? <Sell /> : <Navigate to="/login" replace />} 
           />
 
           {/* Redirect to homepage if authenticated, otherwise to login */}
