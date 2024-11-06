@@ -18,6 +18,7 @@ const Login = ({ onLogin }) => {
     try {
       const token = await loginUser(email, password);
       localStorage.setItem('token', token);  // Store the JWT token
+      localStorage.setItem('email', email);
       onLogin(true);  // Proceed to the app
       navigate("/homepage");  // Navigate to homepage on successful login
     } catch (error) {
