@@ -1,7 +1,7 @@
-// routes/products.js
+// routes/productsFetch.js
 const express = require('express');
 const router = express.Router();
-const Product = require('../models/product'); // Adjust path as needed
+const Product = require('../models/Product'); // Adjust path as needed
 
 // GET /api/products - Fetch all products
 router.get('/products', async (req, res) => {
