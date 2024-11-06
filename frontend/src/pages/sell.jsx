@@ -13,7 +13,8 @@ const Sell = () => {
     description: "",
     price: "",
   });
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
+  const userEmail = localStorage.getItem('email');
 
   const handleToggleForm = () => {
     setShowForm(!showForm);
@@ -29,14 +30,19 @@ const Sell = () => {
 
     // Form submission logic: Send data to API
     const formDataToSend = new FormData();
-    formDataToSend.append("image", formData.image);
-    formDataToSend.append("name", formData.name);
-    formDataToSend.append("type", formData.type);
-    formDataToSend.append("description", formData.description);
-    formDataToSend.append("price", formData.price);
+    formDataToSend.append("image", formData.image); // Matches `prodImage` in the schema
+    formDataToSend.append("productName", formData.name); // Matches `productName` in the schema
+    formDataToSend.append("productType", formData.type); // Matches `productType` in the schema
+    formDataToSend.append("productDesc", formData.description); // Matches `productDesc` in the schema
+    formDataToSend.append("price", formData.price); // `price` matches schema
+    formDataToSend.append("bid", false); // Set bid to false or true as needed
+
+    // Default or required values
+    formDataToSend.append("sellerStudentID", userEmail); // Replace with actual seller ID if needed
+    formDataToSend.append("productID", `PROD_${Date.now()}`); // Unique product ID
 
     try {
-      const response = await fetch("create product api", {
+      const response = await fetch("http://localhost:5000/api/postProducts", {
         method: "POST",
         body: formDataToSend,
       });
@@ -52,7 +58,7 @@ const Sell = () => {
         setShowForm(false);
         navigate("/sell");
       } else {
-        alert("Failed to list product.");
+        console.log("Failed to list product.");
       }
     } catch (error) {
       console.error("Error listing product:", error);
@@ -92,9 +98,7 @@ const Sell = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium">
-                  Product Name
-                </label>
+                <label className="block text-sm font-medium">Product Name</label>
                 <input
                   type="text"
                   name="name"
@@ -129,9 +133,7 @@ const Sell = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium">
-                  Selling Price ($)
-                </label>
+                <label className="block text-sm font-medium">Selling Price ($)</label>
                 <input
                   type="number"
                   name="price"
